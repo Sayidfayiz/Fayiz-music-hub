@@ -145,7 +145,7 @@
         </p>
     </div>
 
-    <script>
+  <script>
     document.addEventListener("DOMContentLoaded", function () {
         let video = document.getElementById("bgVideo");
 
@@ -154,7 +154,7 @@
             video.setAttribute("playsinline", "");
             video.play().then(() => {
                 console.log("Video autoplayed successfully!");
-                setTimeout(loadSongs, 2000); // Delay songs.json by 2 seconds
+                loadSongs(); // Load songs right after the video starts
             }).catch(error => {
                 console.log("Autoplay blocked. Trying again...");
             });
@@ -168,6 +168,7 @@
     });
 
     async function loadSongs() {
+        console.log("Loading songs...");
         const response = await fetch('songs.json');
         const songs = await response.json();
         const container = document.getElementById('songs');
@@ -189,6 +190,17 @@
 
             container.appendChild(songCard);
         });
+
+        console.log("Songs loaded successfully!");
+    }
+
+    function toggleContent(id) {
+        var content = document.getElementById(id);
+        if (content.style.display === 'none' || content.style.display === '') {
+            content.style.display = 'block';
+        } else {
+            content.style.display = 'none';
+        }
     }
 </script>
 </body>
