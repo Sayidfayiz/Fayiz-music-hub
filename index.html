@@ -97,10 +97,20 @@
 </head>
 <body>
     <video class="background-video" autoplay muted loop playsinline>
-        <source src="3571264-uhd_3840_2160_30fps.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
-    
+    <source src="3571264-uhd_3840_2160_30fps.mp4" type="video/mp4">
+</video>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let video = document.querySelector(".background-video");
+        video.play().catch(error => {
+            console.log("Autoplay prevented, trying again...");
+            video.muted = true;
+            video.play();
+        });
+    });
+</script>
+
     <div class="container">
         <h1 style="font-size: 2.5em; font-weight: bold;">Music & Media Hub</h1>
         <p style="font-size: 1.2em;">Welcome to a space where sound and visuals come to life.</p>
