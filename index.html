@@ -129,23 +129,7 @@
     });
 </script>
 
-    <div class="container">
-        <h1 style="font-size: 2.5em; font-weight: bold;">Music & Media Hub</h1>
-        <p style="font-size: 1.2em;">Welcome to a space where sound and visuals come to life.</p>
-        
-        <p class="clickable" onclick="toggleContent('songs')">➤ Songs List</p>
-        <div id="songs" class="hidden-content"></div>
-
-        <p style="margin-top: 20px; font-size: 1.2em;">
-            Follow me on Instagram: 
-            <a href="https://www.instagram.com/say_idfayiz" target="_blank" 
-               style="color: #C084FC; text-decoration: none; font-weight: bold;">
-               @say_idfayiz
-            </a>
-        </p>
-    </div>
-
-  <script>
+    <script>
     function toggleContent(id) {
         var content = document.getElementById(id);
         if (content.style.display === 'none' || content.style.display === '') {
@@ -156,9 +140,11 @@
     }
 
     async function loadSongs() {
+        console.log("Loading songs...");
         const response = await fetch('songs.json');
         const songs = await response.json();
         const container = document.getElementById('songs');
+        container.innerHTML = ""; // Clear previous content
 
         songs.forEach(song => {
             const songCard = document.createElement('div');
@@ -177,6 +163,8 @@
 
             container.appendChild(songCard);
         });
+
+        console.log("Songs loaded successfully!");
     }
 
     document.addEventListener("DOMContentLoaded", function () {
