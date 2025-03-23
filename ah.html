@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music & Media Hub</title>
+    <style>
+        body {
+            font-family: 'Poppins', serif;
+            background-color: #0d0d0d;
+            color: #C084FC;
+            text-align: center;
+            padding: 20px;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+        video.background-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            position: relative;
+            z-index: 1;
+        }
+        .clickable {
+            cursor: pointer;
+            font-weight: bold;
+            text-decoration: none;
+            color: #C084FC;
+            transition: color 0.3s ease-in-out;
+        }
+        .clickable:hover {
+            color: #D8B4FE;
+        }
+        .hidden-content {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);
+            transition: all 0.5s ease-in-out;
+        }
+        .music-card {
+            display: flex;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.3);
+            margin: 10px auto;
+            max-width: 400px;
+        }
+        .music-card img {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            margin-right: 10px;
+        }
+        .music-card .controls {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .music-card audio {
+            width: 100%;
+            outline: none;
+        }
+    </style>
+    <script>
+        function toggleContent(id) {
+            var content = document.getElementById(id);
+            if (content.style.display === 'none' || content.style.display === '') {
+                content.style.display = 'block';
+            } else {
+                content.style.display = 'none';
+            }
+        }
+    </script>
+</head>
+<body>
+    <video class="background-video" autoplay muted loop>
+        <source src="3571264-uhd_3840_2160_30fps.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    
+    <div class="container">
+        <h1 style="font-size: 2.5em; font-weight: bold;">Music & Media Hub</h1>
+        
+        <p style="font-size: 1.2em;">Welcome to a space where sound and visuals come to life.</p>
+        
+        <p class="clickable" onclick="toggleContent('study-music')">➤ Musics for Studies</p>
+        <div id="study-music" class="hidden-content">
+            <p>Relax and focus with these study-friendly tracks:</p>
+            
+            <div class="music-card">
+                <img src="https://tse2.mm.bing.net/th?id=OIP.k_IiScGYqPv-y7wCcvcf4AHaHa&pid=Api" alt="2AM Cover">
+                <div class="controls">
+                    <p><strong>2AM</strong></p>
+                    <audio controls>
+                        <source src="𝗮𝗺..mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+            </div>
+        </div>
+
+        <p class="clickable" onclick="toggleContent('best-song')">➤ Best Song to Me</p>
+        <div id="best-song" class="hidden-content">
+            <p>These songs hold a special place in my heart:</p>
+            
+            <div class="music-card">
+                <img src="https://tse2.mm.bing.net/th?id=OIP.jrpGpZGkBTDfvn8okBvhgwHaHa&pid=Api" alt="Teenage Dream Cover">
+                <div class="controls">
+                    <p><strong>Teenage Dream</strong></p>
+                    <audio controls>
+                        <source src="Vietsub  Teenage Dream - Stephen Dawes  Lyrics Video.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+            </div>
+
+            <div class="music-card">
+                <img src="https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/5b/a6/2b/5ba62bd9-f031-3a38-66ed-6e2aa3069ead/artwork.jpg/1200x1200bf-60.jpg" alt="I Think They Call This Love Cover">
+                <div class="controls">
+                    <p><strong>I Think They Call This Love</strong></p>
+                    <audio controls>
+                        <source src="Matthew Ifield - ACOUSTIC VERSION - I think they call this love by Elliot James Reay.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+            </div>
+
+            <div class="music-card">
+                <img src="https://www.jonkmusic.com/wp-content/uploads/2014/08/YearsYears.jpg" alt="Breathe Cover">
+                <div class="controls">
+                    <p><strong>Breathe - Years & Years</strong></p>
+                    <audio controls>
+                        <source src="Years And Years - Breathe (Lyrics)(Olly Alexander).mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+            </div>
+        </div>
+
+        <p style="margin-top: 20px; font-size: 1.2em;">
+            Follow me on Instagram: 
+            <a href="https://www.instagram.com/say_idfayiz" target="_blank" 
+               style="color: #C084FC; text-decoration: none; font-weight: bold;">
+               @say_idfayiz
+            </a>
+        </p>
+    </div>
+</body>
+</html>
