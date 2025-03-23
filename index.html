@@ -104,20 +104,27 @@
     document.addEventListener("DOMContentLoaded", function () {
         let video = document.getElementById("bgVideo");
 
-        function playVideo() {
-            video.muted = true;  // Ensures autoplay works
+        function tryPlayVideo() {
+            video.muted = true;
             video.setAttribute("playsinline", "");  
-            video.play().catch(error => {
-                console.log("Autoplay blocked. Trying again...");
+            video.play().then(() => {
+                console.log("Video autoplayed successfully!");
+            }).catch(error => {
+                console.log("Autoplay blocked. Waiting for user interaction...");
             });
         }
 
-        // Try to autoplay when the page loads
-        playVideo();
+        // Try to autoplay on page load
+        tryPlayVideo();
 
-        // If blocked, play when user interacts with the page
+        // Play video when the user scrolls
+        document.addEventListener("scroll", () => {
+            tryPlayVideo();
+        });
+
+        // Play video when the user clicks anywhere
         document.addEventListener("click", () => {
-            playVideo();
+            tryPlayVideo();
         });
     });
 </script>
