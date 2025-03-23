@@ -96,9 +96,31 @@
     </style>
 </head>
 <body>
-    <video class="background-video" autoplay muted loop playsinline>
+    <video class="background-video" autoplay muted loop playsinline id="bgVideo">
     <source src="3571264-uhd_3840_2160_30fps.mp4" type="video/mp4">
 </video>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let video = document.getElementById("bgVideo");
+
+        function playVideo() {
+            video.muted = true;  // Ensures autoplay works
+            video.setAttribute("playsinline", "");  
+            video.play().catch(error => {
+                console.log("Autoplay blocked. Trying again...");
+            });
+        }
+
+        // Try to autoplay when the page loads
+        playVideo();
+
+        // If blocked, play when user interacts with the page
+        document.addEventListener("click", () => {
+            playVideo();
+        });
+    });
+</script>
 
     <div class="container">
         <h1 style="font-size: 2.5em; font-weight: bold;">Music & Media Hub</h1>
