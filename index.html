@@ -146,29 +146,16 @@
     </div>
 
   <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        let video = document.getElementById("bgVideo");
-
-        function playVideo() {
-            video.muted = true;
-            video.setAttribute("playsinline", "");
-            video.play().then(() => {
-                console.log("Video autoplayed successfully!");
-                loadSongs(); // Load songs right after the video starts
-            }).catch(error => {
-                console.log("Autoplay blocked. Trying again...");
-            });
+    function toggleContent(id) {
+        var content = document.getElementById(id);
+        if (content.style.display === 'none' || content.style.display === '') {
+            content.style.display = 'block';
+        } else {
+            content.style.display = 'none';
         }
-
-        playVideo();
-
-        document.addEventListener("click", () => {
-            playVideo();
-        });
-    });
+    }
 
     async function loadSongs() {
-        console.log("Loading songs...");
         const response = await fetch('songs.json');
         const songs = await response.json();
         const container = document.getElementById('songs');
@@ -190,18 +177,11 @@
 
             container.appendChild(songCard);
         });
-
-        console.log("Songs loaded successfully!");
     }
 
-    function toggleContent(id) {
-        var content = document.getElementById(id);
-        if (content.style.display === 'none' || content.style.display === '') {
-            content.style.display = 'block';
-        } else {
-            content.style.display = 'none';
-        }
-    }
+    document.addEventListener("DOMContentLoaded", function () {
+        loadSongs();
+    });
 </script>
 </body>
 </html>
