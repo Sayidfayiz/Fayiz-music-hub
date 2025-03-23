@@ -152,7 +152,8 @@
                 container.appendChild(songCard);
             });
 
-            container.style.maxHeight = container.scrollHeight + "px";  // Ensure expansion
+            container.style.minHeight = (container.scrollHeight + 100) + "px";
+  // Ensure expansion
         }
 
         loadSongs();
