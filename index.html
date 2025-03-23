@@ -146,45 +146,50 @@
     </div>
 
     <script>
-        function toggleContent(id) {
-            var content = document.getElementById(id);
-            if (content.style.display === 'none' || content.style.display === '') {
-                content.style.display = 'block';
-                content.style.maxHeight = content.scrollHeight + "px";  // Expand smoothly
-            } else {
-                content.style.display = 'none';
-                content.style.maxHeight = "0";  // Collapse smoothly
-            }
-        }
+    document.addEventListener("DOMContentLoaded", function () {
+        let video = document.getElementById("bgVideo");
 
-        async function loadSongs() {
-            const response = await fetch('songs.json');
-            const songs = await response.json();
-            const container = document.getElementById('songs');
-
-            songs.forEach(song => {
-                const songCard = document.createElement('div');
-                songCard.classList.add('music-card');
-
-                songCard.innerHTML = `
-                    <img src="${song.cover}" alt="${song.title} Cover">
-                    <div class="controls">
-                        <p><strong>${song.title}</strong> - ${song.artist}</p>
-                        <audio controls>
-                            <source src="${song.audio}" type="audio/mpeg">
-                            Your browser does not support the audio element.
-                        </audio>
-                    </div>
-                `;
-
-                container.appendChild(songCard);
+        function playVideo() {
+            video.muted = true;
+            video.setAttribute("playsinline", "");
+            video.play().then(() => {
+                console.log("Video autoplayed successfully!");
+                setTimeout(loadSongs, 2000); // Delay songs.json by 2 seconds
+            }).catch(error => {
+                console.log("Autoplay blocked. Trying again...");
             });
-
-            container.style.minHeight = (container.scrollHeight + 100) + "px";
-  // Ensure expansion
         }
 
-        loadSongs();
-    </script>
+        playVideo();
+
+        document.addEventListener("click", () => {
+            playVideo();
+        });
+    });
+
+    async function loadSongs() {
+        const response = await fetch('songs.json');
+        const songs = await response.json();
+        const container = document.getElementById('songs');
+
+        songs.forEach(song => {
+            const songCard = document.createElement('div');
+            songCard.classList.add('music-card');
+
+            songCard.innerHTML = `
+                <img src="${song.cover}" alt="${song.title} Cover">
+                <div class="controls">
+                    <p><strong>${song.title}</strong> - ${song.artist}</p>
+                    <audio controls>
+                        <source src="${song.audio}" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+            `;
+
+            container.appendChild(songCard);
+        });
+    }
+</script>
 </body>
 </html>
