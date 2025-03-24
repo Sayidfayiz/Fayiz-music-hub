@@ -44,25 +44,6 @@
             position: relative;
             z-index: 1;
         }
-        .clickable {
-            cursor: pointer;
-            font-weight: bold;
-            text-decoration: none;
-            color: #C084FC;
-            transition: color 0.3s ease-in-out;
-        }
-        .clickable:hover {
-            color: #D8B4FE;
-        }
-        .hidden-content {
-            display: none;
-            margin-top: 20px;
-            padding: 15px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);
-            transition: all 0.5s ease-in-out;
-        }
         .music-card {
             display: flex;
             align-items: center;
@@ -90,16 +71,6 @@
             outline: none;
         }
     </style>
-    <script>
-        function toggleContent(id) {
-            var content = document.getElementById(id);
-            if (content.style.display === 'none' || content.style.display === '') {
-                content.style.display = 'block';
-            } else {
-                content.style.display = 'none';
-            }
-        }
-    </script>
 </head>
 <body>
     <video class="background-video" autoplay muted loop playsinline>
@@ -112,57 +83,47 @@
         
         <p style="font-size: 1.2em;">Welcome to a space where sound and visuals come to life.</p>
         
-        <p class="clickable" onclick="toggleContent('study-music')">➤ Musics for Studies</p>
-        <div id="study-music" class="hidden-content">
-            <p>Relax and focus with these study-friendly tracks:</p>
-            
-            <div class="music-card">
-                <img src="https://tse2.mm.bing.net/th?id=OIP.k_IiScGYqPv-y7wCcvcf4AHaHa&pid=Api" alt="2AM Cover">
-                <div class="controls">
-                    <p><strong>2AM</strong></p>
-                    <audio controls>
-                        <source src="𝗮𝗺..mp3" type="audio/mpeg">
-                        Your browser does not support the audio element.
-                    </audio>
-                </div>
+        <div class="music-card">
+            <img src="https://tse2.mm.bing.net/th?id=OIP.k_IiScGYqPv-y7wCcvcf4AHaHa&pid=Api" alt="2AM Cover">
+            <div class="controls">
+                <p><strong>2AM</strong></p>
+                <audio controls>
+                    <source src="𝗮𝗺..mp3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
             </div>
         </div>
 
-        <p class="clickable" onclick="toggleContent('best-song')">➤ Best Song to Me</p>
-        <div id="best-song" class="hidden-content">
-            <p>These songs hold a special place in my heart:</p>
-            
-            <div class="music-card">
-                <img src="https://tse2.mm.bing.net/th?id=OIP.jrpGpZGkBTDfvn8okBvhgwHaHa&pid=Api" alt="Teenage Dream Cover">
-                <div class="controls">
-                    <p><strong>Teenage Dream - Stephen Dawes</strong></p>
-                    <audio controls>
-                        <source src="Vietsub  Teenage Dream - Stephen Dawes  Lyrics Video.mp3" type="audio/mpeg">
-                        Your browser does not support the audio element.
-                    </audio>
-                </div>
+        <div class="music-card">
+            <img src="https://tse2.mm.bing.net/th?id=OIP.jrpGpZGkBTDfvn8okBvhgwHaHa&pid=Api" alt="Teenage Dream Cover">
+            <div class="controls">
+                <p><strong>Teenage Dream - Stephen Dawes</strong></p>
+                <audio controls>
+                    <source src="Vietsub  Teenage Dream - Stephen Dawes  Lyrics Video.mp3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
             </div>
+        </div>
 
-            <div class="music-card">
-                <img src="https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/5b/a6/2b/5ba62bd9-f031-3a38-66ed-6e2aa3069ead/artwork.jpg/1200x1200bf-60.jpg" alt="I Think They Call This Love Cover">
-                <div class="controls">
-                    <p><strong>I Think They Call This Love - Matthew Ifield</strong></p>
-                    <audio controls>
-                        <source src="Matthew Ifield - ACOUSTIC VERSION - I think they call this love by Elliot James Reay.mp3" type="audio/mpeg">
-                        Your browser does not support the audio element.
-                    </audio>
-                </div>
+        <div class="music-card">
+            <img src="https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/5b/a6/2b/5ba62bd9-f031-3a38-66ed-6e2aa3069ead/artwork.jpg/1200x1200bf-60.jpg" alt="I Think They Call This Love Cover">
+            <div class="controls">
+                <p><strong>I Think They Call This Love - Matthew Ifield</strong></p>
+                <audio controls>
+                    <source src="Matthew Ifield - ACOUSTIC VERSION - I think they call this love by Elliot James Reay.mp3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
             </div>
+        </div>
 
-            <div class="music-card">
-                <img src="https://www.jonkmusic.com/wp-content/uploads/2014/08/YearsYears.jpg" alt="Breathe Cover">
-                <div class="controls">
-                    <p><strong>Breathe - Years & Years</strong></p>
-                    <audio controls>
-                        <source src="Years And Years - Breathe (Lyrics)(Olly Alexander).mp3" type="audio/mpeg">
-                        Your browser does not support the audio element.
-                    </audio>
-                </div>
+        <div class="music-card">
+            <img src="https://www.jonkmusic.com/wp-content/uploads/2014/08/YearsYears.jpg" alt="Breathe Cover">
+            <div class="controls">
+                <p><strong>Breathe - Years & Years</strong></p>
+                <audio controls>
+                    <source src="Years And Years - Breathe (Lyrics)(Olly Alexander).mp3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
             </div>
         </div>
 
