@@ -135,5 +135,35 @@
             </a>
         </p>
     </div>
+    <script>
+    async function loadSongs() {
+        try {
+            const response = await fetch('songs.json');
+            const songs = await response.json();
+            const container = document.getElementById("music-container");
+            container.innerHTML = "";
+
+            songs.forEach(song => {
+                const musicCard = document.createElement("div");
+                musicCard.classList.add("music-card");
+                musicCard.innerHTML = `
+                    <img src="${song.cover}" alt="${song.title} Cover">
+                    <div class="controls">
+                        <p><strong>${song.title}</strong></p>
+                        <audio controls>
+                            <source src="${song.src}" type="audio/mpeg">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </div>
+                `;
+                container.appendChild(musicCard);
+            });
+        } catch (error) {
+            console.error("Error loading songs:", error);
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", loadSongs);
+</script>
 </body>
 </html>
