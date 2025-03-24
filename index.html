@@ -7,9 +7,17 @@
     <link rel="stylesheet" href="styles.css"> <!-- ✅ Keeping your styles -->
 </head>
 <body>
-    <video class="background-video" autoplay muted loop playsinline></video>
+    <!-- ✅ Background Video -->
+    <video class="background-video" autoplay muted loop playsinline>
+        <source src="your-background-video.mp4" type="video/mp4">
+    </video>
 
-    <!-- ✅ Keeping your original container for songs -->
+    <!-- ✅ Heading -->
+    <header>
+        <h1>Welcome to Music Hub</h1>
+    </header>
+
+    <!-- ✅ Music Container (Songs Stack Vertically) -->
     <div id="music-container" class="container"></div>
 
     <script>
@@ -30,12 +38,12 @@
 
                 songs.forEach(song => {
                     const musicCard = document.createElement("div");
-                    musicCard.classList.add("music-card"); // ✅ Keeping the design
+                    musicCard.classList.add("music-card"); // ✅ Keeping your design
 
                     musicCard.innerHTML = `
                         <div class="music-item">
                             <img src="${song.cover}" alt="${song.title} Cover">
-                            <p>${song.title}</p>
+                            <h2>${song.title}</h2>
                             <audio controls>
                                 <source src="${song.src}" type="audio/mpeg">
                                 Your browser does not support the audio element.
