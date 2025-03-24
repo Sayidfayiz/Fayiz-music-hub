@@ -3,23 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Music Hub</title>
-    <link rel="stylesheet" href="styles.css"> <!-- ✅ Keeping your styles -->
+    <title>Music & Media Hub</title>
+    <style>
+        body {
+            font-family: 'Poppins', serif;
+            background-color: #0d0d0d;
+            color: #C084FC;
+            text-align: center;
+            padding: 20px;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+        video.background-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            background: black;
+            opacity: 0.7;
+            pointer-events: none;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background: rgba(0, 0, 0, 0.85);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+            position: relative;
+            z-index: 1;
+        }
+        .music-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.9);
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.3);
+            margin: 10px auto;
+            max-width: 400px;
+        }
+        .music-card img {
+            width: 100px;
+            height: 100px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+        .music-card audio {
+            width: 100%;
+            outline: none;
+        }
+    </style>
 </head>
 <body>
-    <!-- ✅ Background Video -->
     <video class="background-video" autoplay muted loop playsinline>
-        <source src="your-background-video.mp4" type="video/mp4">
+        <source src="3571264-uhd_3840_2160_30fps.mp4" type="video/mp4">
+        Your browser does not support the video tag.
     </video>
-
-    <!-- ✅ Heading -->
-    <header>
-        <h1>Welcome to Music Hub</h1>
-    </header>
-
-    <!-- ✅ Music Container (Songs Stack Vertically) -->
-    <div id="music-container" class="container"></div>
-
+    
+    <div class="container">
+        <h1 style="font-size: 2.5em; font-weight: bold;">Music & Media Hub</h1>
+        <p style="font-size: 1.2em;">Welcome to a space where sound and visuals come to life.</p>
+        
+        <div id="music-container"></div>
+    </div>
+    
     <script>
         async function loadSongs() {
             try {
@@ -32,34 +92,27 @@
                     return;
                 }
 
-                console.log("Loading songs into the page...");
-
-                container.innerHTML = ""; // ✅ Clears old songs before adding new ones
+                container.innerHTML = "";
 
                 songs.forEach(song => {
                     const musicCard = document.createElement("div");
-                    musicCard.classList.add("music-card"); // ✅ Keeping your design
-
+                    musicCard.classList.add("music-card");
                     musicCard.innerHTML = `
-                        <div class="music-item">
-                            <img src="${song.cover}" alt="${song.title} Cover">
-                            <h2>${song.title}</h2>
-                            <audio controls>
-                                <source src="${song.src}" type="audio/mpeg">
-                                Your browser does not support the audio element.
-                            </audio>
-                        </div>
+                        <img src="${song.cover}" alt="${song.title} Cover">
+                        <p><strong>${song.title}</strong></p>
+                        <audio controls>
+                            <source src="${song.src}" type="audio/mpeg">
+                            Your browser does not support the audio element.
+                        </audio>
                     `;
-
                     container.appendChild(musicCard);
                 });
-
             } catch (error) {
                 console.error("Error loading songs:", error);
             }
         }
 
-        loadSongs();
+        document.addEventListener("DOMContentLoaded", loadSongs);
     </script>
 </body>
 </html>
