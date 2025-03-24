@@ -138,10 +138,11 @@
     <script>
     async function loadSongs() {
         try {
-            const response = await fetch('songs.json');
+            const response = await fetch('songs.json'); // Fetch the songs from JSON
             const songs = await response.json();
             const container = document.getElementById("music-container");
-            container.innerHTML = "";
+
+            container.innerHTML = ""; // ✅ This clears old songs before adding new ones
 
             songs.forEach(song => {
                 const musicCard = document.createElement("div");
