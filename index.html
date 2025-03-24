@@ -3,25 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Music & Media Hub</title>
+    <title>Music Hub</title>
     <style>
         body {
-            font-family: 'Poppins', serif;
-            background-color: #0d0d0d;
-            color: #C084FC;
+            font-family: Arial, sans-serif;
+            background: #111;
+            color: white;
             text-align: center;
-            padding: 20px;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            min-height: 100vh;
-            position: relative;
-            overflow-x: hidden;
-            overflow-y: auto;
         }
-        video.background-video {
+        .background-video {
             position: fixed;
             top: 0;
             left: 0;
@@ -29,152 +19,76 @@
             height: 100%;
             object-fit: cover;
             z-index: -1;
-            background: black;
-            opacity: 0.7;
-            pointer-events: none;
         }
-        .container {
-            max-width: 800px;
-            margin: 20px auto;
-            background: rgba(0, 0, 0, 0.85);
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(5px);
-            position: relative;
-            z-index: 1;
+        #music-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 50px;
         }
         .music-card {
-            display: flex;
-            align-items: center;
-            background: rgba(0, 0, 0, 0.9);
+            background: #222;
             padding: 15px;
-            border-radius: 12px;
-            box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.3);
-            margin: 10px auto;
-            max-width: 400px;
+            border-radius: 10px;
+            text-align: center;
+            width: 200px;
         }
         .music-card img {
-            width: 50px;
-            height: 50px;
-            border-radius: 10px;
-            margin-right: 10px;
-        }
-        .music-card .controls {
-            flex-grow: 1;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        .music-card audio {
             width: 100%;
-            outline: none;
+            border-radius: 10px;
+        }
+        audio {
+            width: 100%;
+            margin-top: 10px;
         }
     </style>
 </head>
 <body>
-    <video class="background-video" autoplay muted loop playsinline>
-        <source src="3571264-uhd_3840_2160_30fps.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
-    
-    <div class="container">
-        <h1 style="font-size: 2.5em; font-weight: bold;">Music & Media Hub</h1>
-        
-        <p style="font-size: 1.2em;">Welcome to a space where sound and visuals come to life.</p>
-        
-        <div class="music-card">
-            <img src="https://tse2.mm.bing.net/th?id=OIP.k_IiScGYqPv-y7wCcvcf4AHaHa&pid=Api" alt="2AM Cover">
-            <div class="controls">
-                <p><strong>2AM</strong></p>
-                <audio controls>
-                    <source src="𝗮𝗺..mp3" type="audio/mpeg">
-                    Your browser does not support the audio element.
-                </audio>
-            </div>
-        </div>
+    <video class="background-video" autoplay muted loop playsinline></video>
 
-        <div class="music-card">
-            <img src="https://tse2.mm.bing.net/th?id=OIP.jrpGpZGkBTDfvn8okBvhgwHaHa&pid=Api" alt="Teenage Dream Cover">
-            <div class="controls">
-                <p><strong>Teenage Dream - Stephen Dawes</strong></p>
-                <audio controls>
-                    <source src="Vietsub  Teenage Dream - Stephen Dawes  Lyrics Video.mp3" type="audio/mpeg">
-                    Your browser does not support the audio element.
-                </audio>
-            </div>
-        </div>
+    <!-- ✅ Fixed: Added a div to display songs -->
+    <div id="music-container" class="container"></div>
 
-        <div class="music-card">
-            <img src="https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/5b/a6/2b/5ba62bd9-f031-3a38-66ed-6e2aa3069ead/artwork.jpg/1200x1200bf-60.jpg" alt="I Think They Call This Love Cover">
-            <div class="controls">
-                <p><strong>I Think They Call This Love - Matthew Ifield</strong></p>
-                <audio controls>
-                    <source src="Matthew Ifield - ACOUSTIC VERSION - I think they call this love by Elliot James Reay.mp3" type="audio/mpeg">
-                    Your browser does not support the audio element.
-                </audio>
-            </div>
-        </div>
-
-        <div class="music-card">
-            <img src="https://www.jonkmusic.com/wp-content/uploads/2014/08/YearsYears.jpg" alt="Breathe Cover">
-            <div class="controls">
-                <p><strong>Breathe - Years & Years</strong></p>
-                <audio controls>
-                    <source src="Years And Years - Breathe (Lyrics)(Olly Alexander).mp3" type="audio/mpeg">
-                    Your browser does not support the audio element.
-                </audio>
-            </div>
-        </div>
-        <div id="music-container"></div>
-        <p style="margin-top: 20px; font-size: 1.2em;">
-            Follow me on Instagram: 
-            <a href="https://www.instagram.com/say_idfayiz" target="_blank" 
-               style="color: #C084FC; text-decoration: none; font-weight: bold;">
-               @say_idfayiz
-            </a>
-        </p>
-    </div>
     <script>
-    let songsLoaded = false; // ✅ Prevents songs from loading multiple times
+        async function loadSongs() {
+            try {
+                const response = await fetch('songs.json');
+                const songs = await response.json();
+                const container = document.getElementById("music-container");
 
-    async function loadSongs() {
-        if (songsLoaded) return; // ✅ Stops duplicate loading
-        songsLoaded = true; // ✅ Ensures songs load only once
+                if (!container) {
+                    console.error("Error: #music-container not found!");
+                    return;
+                }
 
-        try {
-            const response = await fetch('songs.json');
-            const songs = await response.json();
-            const container = document.getElementById("music-container");
+                console.log("Loading songs into the page...");
 
-            if (!container) {
-                console.error("Error: #music-container not found!");
-                return;
+                container.innerHTML = ""; // ✅ Clears old songs before adding new ones
+
+                songs.forEach(song => {
+                    const musicCard = document.createElement("div");
+                    musicCard.classList.add("music-card");
+                    musicCard.innerHTML = `
+                        <img src="${song.cover}" alt="${song.title} Cover">
+                        <div class="controls">
+                            <p><strong>${song.title}</strong></p>
+                            <audio controls>
+                                <source src="${song.src}" type="audio/mpeg">
+                                Your browser does not support the audio element.
+                            </audio>
+                        </div>
+                    `;
+                    container.appendChild(musicCard);
+                });
+
+                console.log("Songs loaded successfully!");
+            } catch (error) {
+                console.error("Error loading songs:", error);
             }
-
-            container.innerHTML = ""; // ✅ Clears old songs before adding new ones
-
-            songs.forEach(song => {
-                const musicCard = document.createElement("div");
-                musicCard.classList.add("music-card");
-                musicCard.innerHTML = `
-                    <img src="${song.cover}" alt="${song.title} Cover">
-                    <div class="controls">
-                        <p><strong>${song.title}</strong></p>
-                        <audio controls>
-                            <source src="${song.src}" type="audio/mpeg">
-                            Your browser does not support the audio element.
-                        </audio>
-                    </div>
-                `;
-                container.appendChild(musicCard);
-            });
-        } catch (error) {
-            console.error("Error loading songs:", error);
         }
-    }
 
-    document.addEventListener("DOMContentLoaded", loadSongs);
-</script>
+        document.addEventListener("DOMContentLoaded", loadSongs);
+    </script>
 </body>
 </html>
