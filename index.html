@@ -136,7 +136,12 @@
         </p>
     </div>
     <script>
+    let songsLoaded = false; // ✅ Prevents songs from loading multiple times
+
     async function loadSongs() {
+        if (songsLoaded) return; // ✅ Stops duplicate loading
+        songsLoaded = true; // ✅ Ensures songs load only once
+
         try {
             const response = await fetch('songs.json');
             const songs = await response.json();
@@ -147,7 +152,7 @@
                 return;
             }
 
-            container.innerHTML = ""; // ✅ Clear old songs before adding new ones
+            container.innerHTML = ""; // ✅ Clears old songs before adding new ones
 
             songs.forEach(song => {
                 const musicCard = document.createElement("div");
